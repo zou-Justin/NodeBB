@@ -25,12 +25,13 @@ const validSorts = [
 ];
 
 
-async function checkCategories(categoryFields,currentPage) {
-	return (!categoryFields.slug || (categoryFields && categoryFields.disabled) || (userSettings.usePagination && currentPage < 1))
+function checkCategories(categoryFields, currentPage, userSettings) {
+	return (!categoryFields.slug || (categoryFields && categoryFields.disabled) ||
+	(userSettings.usePagination && currentPage < 1));
 }
 
-async function checkRes(res,req,categoryFields,cid) {
-	return !res.locals.isAPI && !req.params.slug && (categoryFields.slug && categoryFields.slug !== `${cid}/`)	
+function checkRes(res, req, categoryFields, cid) {
+	return !res.locals.isAPI && !req.params.slug && (categoryFields.slug && categoryFields.slug !== `${cid}/`);
 }
 
 categoryController.get = async function (req, res, next) {
@@ -50,7 +51,7 @@ categoryController.get = async function (req, res, next) {
 		user.auth.getFeedToken(req.uid),
 	]);
 
-	if (checkCategories(categoryFields,currentPage)) {
+	if (checkCategories(categoryFields, currentPage, userSettings)) {
 		return next();
 	}
 	if (topicIndex < 0) {
@@ -61,7 +62,7 @@ categoryController.get = async function (req, res, next) {
 		return helpers.notAllowed(req, res);
 	}
 
-	if (checkRes(res,req,categoryFields,cid)) {
+	if (checkRes(res, req, categoryFields, cid)) {
 		return helpers.redirect(res, `/category/${categoryFields.slug}?${qs.stringify(req.query)}`, true);
 	}
 
