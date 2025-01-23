@@ -137,40 +137,40 @@ const templateToData = {
 	},
 };
 
-postsController.getBookmarks = async function (req, res, next) {
-	await getPostsFromUserSet('account/bookmarks', req, res, next);
+postsController.getBookmarks = async function (req, res) {
+	await getPostsFromUserSet('account/bookmarks', req, res);
 };
 
-postsController.getPosts = async function (req, res, next) {
-	await getPostsFromUserSet('account/posts', req, res, next);
+postsController.getPosts = async function (req, res) {
+	await getPostsFromUserSet('account/posts', req, res);
 };
 
-postsController.getUpVotedPosts = async function (req, res, next) {
-	await getPostsFromUserSet('account/upvoted', req, res, next);
+postsController.getUpVotedPosts = async function (req, res) {
+	await getPostsFromUserSet('account/upvoted', req, res);
 };
 
-postsController.getDownVotedPosts = async function (req, res, next) {
-	await getPostsFromUserSet('account/downvoted', req, res, next);
+postsController.getDownVotedPosts = async function (req, res) {
+	await getPostsFromUserSet('account/downvoted', req, res);
 };
 
-postsController.getBestPosts = async function (req, res, next) {
-	await getPostsFromUserSet('account/best', req, res, next);
+postsController.getBestPosts = async function (req, res) {
+	await getPostsFromUserSet('account/best', req, res);
 };
 
-postsController.getControversialPosts = async function (req, res, next) {
-	await getPostsFromUserSet('account/controversial', req, res, next);
+postsController.getControversialPosts = async function (req, res) {
+	await getPostsFromUserSet('account/controversial', req, res);
 };
 
-postsController.getWatchedTopics = async function (req, res, next) {
-	await getPostsFromUserSet('account/watched', req, res, next);
+postsController.getWatchedTopics = async function (req, res) {
+	await getPostsFromUserSet('account/watched', req, res);
 };
 
-postsController.getIgnoredTopics = async function (req, res, next) {
-	await getPostsFromUserSet('account/ignored', req, res, next);
+postsController.getIgnoredTopics = async function (req, res) {
+	await getPostsFromUserSet('account/ignored', req, res);
 };
 
-postsController.getTopics = async function (req, res, next) {
-	await getPostsFromUserSet('account/topics', req, res, next);
+postsController.getTopics = async function (req, res) {
+	await getPostsFromUserSet('account/topics', req, res);
 };
 
 async function getPostsFromUserSet(template, req, res) {

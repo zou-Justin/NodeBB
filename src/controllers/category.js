@@ -24,6 +24,12 @@ const validSorts = [
 	'recently_replied', 'recently_created', 'most_posts', 'most_votes', 'most_views',
 ];
 
+
+async function checkCategories(categoryFields,currentPage) {
+	return (!categoryFields.slug || (categoryFields && categoryFields.disabled) || (userSettings.usePagination && currentPage < 1))
+}
+
+
 categoryController.get = async function (req, res, next) {
 	const cid = req.params.category_id;
 
@@ -41,9 +47,7 @@ categoryController.get = async function (req, res, next) {
 		user.auth.getFeedToken(req.uid),
 	]);
 
-	if (!categoryFields.slug ||
-		(categoryFields && categoryFields.disabled) ||
-		(userSettings.usePagination && currentPage < 1)) {
+	if (checkCategories(categoryFields,currentPage)) {
 		return next();
 	}
 	if (topicIndex < 0) {
