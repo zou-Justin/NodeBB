@@ -34,12 +34,17 @@ function checkRes(res, req, categoryFields, cid) {
 	return !res.locals.isAPI && !req.params.slug && (categoryFields.slug && categoryFields.slug !== `${cid}/`);
 }
 
+function check3(req, utils, cid) {
+	return (req.params.topic_index && !utils.isNumber(req.params.topic_index)) || !utils.isNumber(cid);
+}
+
 categoryController.get = async function (req, res, next) {
+	console.log('Justin Zou');
 	const cid = req.params.category_id;
 
 	let currentPage = parseInt(req.query.page, 10) || 1;
 	let topicIndex = utils.isNumber(req.params.topic_index) ? parseInt(req.params.topic_index, 10) - 1 : 0;
-	if ((req.params.topic_index && !utils.isNumber(req.params.topic_index)) || !utils.isNumber(cid)) {
+	if (check3(req, utils, cid)) {
 		return next();
 	}
 
